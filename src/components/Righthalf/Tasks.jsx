@@ -1,32 +1,48 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { deleteToDo } from '../RDK/AddToDo'
+
 function Tasks() {
-  const dispatch = useDispatch()
-  function handleClick(btnId){
-    dispatch(deleteToDo(btnId))
-  }
-    const val=useSelector((state)=>state.toDoAdd.todos)
+  const dispatch = useDispatch();
+  const todos = useSelector((state) => state.toDoAdd.todos);
+
+  const handleClick = (btnId) => {
+    dispatch(deleteToDo(btnId));
+  };
+
   return (
-    <div className='w-full flex flex-col md:w-1/3 lg:w-1/3 bg-zinc-800 rounded-md p-6 items-start'>
-        {(Object.keys(val).length===0)? <div className='w-full h-full flex justify-center items-center text-3xl font-bold p-2'>no to dos 🥲</div> : <div className='w-full'>
-        <div className='w-full  flex justify-center items-center font-bold text-2xl mb-3'>tasks</div>
-        <div className='w-full flex justify-center items-center'>
-            <ul className='w-4/6 flex flex-col gap-2 text-center text-xl font-mono rounded-md text-wrap'>
-                {
-                    Object.values(val).map((itm)=>{
-                    return(<div className='w-full flex gap-1'>
-                      <li className='w-full h-35px bg-blue-500 rounded-md break-words overflow-hidden text-ellipsis p-3' key={itm.id}>{itm.text}</li>
-                      <button onClick={()=>{handleClick(itm.id)}} className='bg-red-500 text-white rounded-md ' type="button">Delete Todo</button>
-                    </div>) }
-                )}
+    <div className="w-full md:w-1/3 lg:w-1/3 h-2/3 bg-zinc-800 rounded-md p-6 flex flex-col overflow-y-auto">
+      {
+        Object.keys(todos).length === 0 ? (
+          <div className="flex-grow flex justify-center items-center text-2xl font-bold text-white">
+            No to-dos 🥲
+          </div>
+        ) : (
+          <>
+            <div className="text-center text-white text-2xl font-bold mb-4">Tasks</div>
+            <ul className="flex flex-col gap-3 overflow-y-auto max-h-full pr-2">
+              {
+                Object.values(todos).map((todo) => (
+                  <li
+                    key={todo.id}
+                    className="bg-blue-500 text-white rounded-md p-3 flex justify-between items-center"
+                  >
+                    <span className="break-words max-w-[70%]">{todo.text}</span>
+                    <button
+                      onClick={() => handleClick(todo.id)}
+                      className="bg-red-600 px-3 py-1 rounded-md hover:bg-red-700"
+                    >
+                      Delete
+                    </button>
+                  </li>
+                ))
+              }
             </ul>
-        </div>
-         </div>}
-         
+          </>
+        )
+      }
     </div>
-  )
+  );
 }
 
-export default Tasks
+export default Tasks;
