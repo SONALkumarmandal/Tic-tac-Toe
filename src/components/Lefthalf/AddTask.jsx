@@ -29,7 +29,7 @@ function AddTask() {
         </div>
         <div className='h-5/6 w-full  flex flex-col pt-10 items-center text-center gap-4'>
             <input value={text} onChange={handleChange} className='bg-white w-2/3 h-2/4 border-2 border-black rounded-md font-mono text-black text-center text-wrap' type="text" name="" id="" />
-            <button onClick={handleAdd} className='bg-blue-500 rounded-2xl w-2/3 h-1/4 cursor-pointer hover:bg-blue-600' type="submit">Add</button>
+            <button onClick={handleAdd} className='bg-blue-500 rounded-xl w-2/3 h-2/4 cursor-pointer hover:bg-blue-600' type="submit">Add</button>
         </div>
         </div>
     </div>
